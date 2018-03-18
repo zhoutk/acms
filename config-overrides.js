@@ -1,7 +1,27 @@
-const rewireTypescript = require('react-app-rewire-typescript');
+/* config-overrides.js */
+const tsImportPluginFactory = require('ts-import-plugin')
+const { getLoader } = require("react-app-rewired");
+const rewireLess = require('react-app-rewire-less');
 
 module.exports = function override(config, env) {
-    config = rewireTypescript(config, env);
+    const tsLoader = getLoader(
+        config.module.rules,
+        rule =>
+            rule.loader &&
+            typeof rule.loader === 'string' &&
+            rule.loader.includes('ts-loader')
+    );
+
+    tsLoader.options = {
+        getCustomTransformers: () => ({
+            before: [ tsImportPluginFactory({
+                libraryName: 'antd',
+                libraryDirectory: 'es',
+                style: true,
+            }) ]
+        })
+    };
+
     config.resolve.alias = Object.assign({}, (config.resolve.alias || {}), {
         'react': 'anujs',
         'react-dom': 'anujs',
@@ -16,5 +36,10 @@ module.exports = function override(config, env) {
         //如果你在移动端用到了onTouchTap事件
         'react-tap-event-plugin': 'anujs/lib/injectTapEventPlugin',
     })
+
+    config = rewireLess.withLoaderOptions({
+        modifyVars: { "@primary-color": "#1DA57A" },
+    })(config, env);
+
     return config;
-}
+};
