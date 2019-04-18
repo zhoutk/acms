@@ -1,19 +1,27 @@
-import * as React from 'react';
-import { Button } from 'antd';
-import './App.less';
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import List from './components/list'
 
-const logo = require('./logo.svg');
-
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+        <List/>
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
         </header>
-        <p/>
-        <Button type="primary">Button</Button>
       </div>
     );
   }
