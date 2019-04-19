@@ -1,26 +1,46 @@
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 
-export default function DataLoader() {
-  const [data, setData] = useState({hits: []});
+export default function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { count, step } = state;
 
   useEffect(() => {
-    fetch("http://47.93.253.17:1201/rs/users")
-      .then(response => response.json())
-      .then(data => setData({hits: data.data}));
-  }, []);
+    const id = setInterval(() => {
+      dispatch({ type: 'tick' });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [dispatch]);
 
   return (
-    <div>
-      <ul>
-        {data.hits.map(el => (
-          <li key={el.id}>{el.username}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <h1>{count}</h1>
+      <input value={step} onChange={e => {
+        dispatch({
+          type: 'step',
+          step: Number(e.target.value)
+        });
+      }} />
+    </>
   );
+}
+
+const initialState = {
+  count: 0,
+  step: 1,
+};
+
+function reducer(state, action) {
+  const { count, step } = state;
+  if (action.type === 'tick') {
+    return { count: count + step, step };
+  } else if (action.type === 'step') {
+    return { count, step: action.step };
+  } else {
+    throw new Error();
+  }
 }
 
 // function App() {
