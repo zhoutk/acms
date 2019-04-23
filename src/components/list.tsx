@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useRef, useReducer } from "react";
 
 export default function SearchResults() {
-  const [data, setData] = useState({ data: [] });
+  const [data, setData] = useState({ hits: [] });
 
   useEffect(() => {
     function getFetchUrl() {
@@ -13,7 +13,7 @@ export default function SearchResults() {
 
     async function fetchData() {
       const result = await axios(getFetchUrl());
-      setData(result.data);
+      setData(() => ({hits: result.data.data}));
 }
 
     fetchData();
@@ -21,7 +21,7 @@ export default function SearchResults() {
   return (
     <>
       <ul>
-        {data.data.map(item => (
+        {data.hits['map'](item => (
           <li key={item.id}>
             <a href={item.username}>{item.username}</a>
           </li>
