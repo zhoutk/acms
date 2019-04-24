@@ -8,6 +8,7 @@ import { ApolloProvider } from 'react-apollo'
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
+import CssBaseline from '@material-ui/core/CssBaseline'
 import App from './App';
 import './index.css';
 import List from './components/list'
@@ -64,12 +65,13 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
+    <CssBaseline/>
     <Router history={hist}>
       <Switch>
         {/* <LocaleProvider locale={zhCN}> */}
         <Route path="/list" component={List} />
-        <Route path="/count" component={App} />
-        <Redirect from="/" to="/list" />
+        <Route path="/app" component={App} />
+        <Redirect from="/" to="/app" />
         {/* </LocaleProvider> */}
       </Switch>
     </Router>
