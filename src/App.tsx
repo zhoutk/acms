@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import List from './components/list'
+import Counter from './components/counter'
 
 class App extends Component {
   render() {
     return (
-      <List/>
+      <Counter initialCount = {0} />
     );
   }
 }
