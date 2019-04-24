@@ -1,17 +1,19 @@
-import { LocaleProvider, message } from 'antd'
-import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient  } from 'apollo-client'
 import { ApolloLink, NextLink, Observable, Operation } from 'apollo-link';
 import { BatchHttpLink } from 'apollo-link-batch-http';
-import { onError } from 'apollo-link-error';
+// import { onError } from 'apollo-link-error';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo'
 import * as ReactDOM from 'react-dom';
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import App from './App';
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
+
+const hist = createBrowserHistory();
 
 // 请求拦截器
 const request = async (operation: Operation) => {
@@ -47,12 +49,12 @@ const requestLink = new ApolloLink((operation: Operation, forward: NextLink) => 
 
 const client = new ApolloClient({
   link: ApolloLink.from([
-    onError(({ graphQLErrors }) => {
-      // 全局错误处理
-      if (Array.isArray(graphQLErrors)) {
-        message.error(graphQLErrors[0].message)
-      }
-    }),
+    // onError(({ graphQLErrors }) => {
+    //   // 全局错误处理
+    //   if (Array.isArray(graphQLErrors)) {
+    //     message.error(graphQLErrors[0].message)
+    //   }
+    // }),
     requestLink,
     new BatchHttpLink({ uri: process.env.REACT_APP_SERVER_URL }),
   ]),
@@ -61,9 +63,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <LocaleProvider locale={zhCN}>
+    {/* <LocaleProvider locale={zhCN}> */}
       <App />
-    </LocaleProvider>
+    {/* </LocaleProvider> */}
   </ApolloProvider>,
   document.getElementById('root') as HTMLElement
 );
