@@ -10,6 +10,7 @@ import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import App from './App';
 import './index.css';
+import List from './components/list'
 
 import * as serviceWorker from './serviceWorker';
 
@@ -63,10 +64,17 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    {/* <LocaleProvider locale={zhCN}> */}
-      <App />
-    {/* </LocaleProvider> */}
+    <Router history={hist}>
+      <Switch>
+        {/* <LocaleProvider locale={zhCN}> */}
+        <Route path="/list" component={List} />
+        <Route path="/count" component={App} />
+        <Redirect from="/" to="/list" />
+        {/* </LocaleProvider> */}
+      </Switch>
+    </Router>
   </ApolloProvider>,
+
   document.getElementById('root') as HTMLElement
 );
 
