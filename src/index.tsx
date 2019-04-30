@@ -10,7 +10,6 @@ import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import App from './App';
-import './index.css';
 import List from './components/list'
 
 import * as serviceWorker from './serviceWorker';
