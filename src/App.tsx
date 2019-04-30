@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import Counter from './components/counter'
-import TopBar from './components/TopBar';
+import React from 'react'
+import AdminLayout from './containers/AdminLayout'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import themes, { overrides } from './themes';
 
+const theme = createMuiTheme({
+    ...themes.default, 
+    ...overrides
+});
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <Counter initialCount={0} />
-        <TopBar />
-      </>
-    );
-  }
+function App() {
+  return (
+    <MuiThemeProvider theme = { theme }>
+      <AdminLayout/>
+    </MuiThemeProvider>);
 }
 
 export default App;

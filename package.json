@@ -38,6 +38,7 @@
   ],
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/classnames": "^2.2.7",
     "@types/graphql": "14.0.7",
     "@types/history": "^4.7.2",
     "@types/node": "11.9.4",
