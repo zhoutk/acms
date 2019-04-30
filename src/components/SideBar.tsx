@@ -30,12 +30,12 @@ const styles = (theme: Theme | any) => ({
     }
 });
 
-interface Props extends WithStyles<typeof styles> {
+interface IProps extends WithStyles<typeof styles> {
     open: boolean,
     handleDrawerClose: () => void
   }
 
-const SideBar = ({ open, handleDrawerClose, classes }: Props) => (
+const SideBar = ({ open, handleDrawerClose, classes }: IProps) => (
     <Drawer
         className={classes.drawer}
         variant="persistent"

@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -32,12 +31,12 @@ const styles = (theme: Theme | any) => ({
   }
 });
 
-interface Props extends WithStyles<typeof styles> {
+interface IProps extends WithStyles<typeof styles> {
   open: boolean,
   handleDrawerOpen: () => void
 }
 
-const PrimarySearchAppBar = ({open, handleDrawerOpen, classes}: Props) => (
+const PrimarySearchAppBar = ({open, handleDrawerOpen, classes}: IProps) => (
     <AppBar
         position="fixed"
         className={classNames(classes.appBar, {
