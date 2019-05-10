@@ -66,13 +66,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <CssBaseline/>
     <Router history={hist}>
-      <Switch>
-        {/* <LocaleProvider locale={zhCN}> */}
-        <Route path="/list" component={List} />
-        <Route path="/app" component={App} />
-        <Redirect from="/" to="/app" />
-        {/* </LocaleProvider> */}
-      </Switch>
+      <App />
     </Router>
   </ApolloProvider>,
 
