@@ -7,10 +7,9 @@ import * as React from 'react';
 import { ApolloProvider } from 'react-apollo'
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import App from './App';
-import List from './components/list'
 
 import * as serviceWorker from './serviceWorker';
 
